@@ -18,9 +18,17 @@ public class BrickSpawner : MonoBehaviour
             float x = transform.position.x; // Will change for every brick in a row
             for (int col = 0; col < columnCount; col++)
             {
-                int randomIndex = Random.Range(0, brickPrefabs.Length);
+                GameObject brick;
+                if (row == 0)
+                {
+                    brick = brickPrefabs[brickPrefabs.Length -1];
+                }
+                else
+                {
+                    int randomIndex = Random.Range(0, brickPrefabs.Length -1);
+                    brick = brickPrefabs[randomIndex];
+                }
                 float randomZOffset = Random.Range(0f, maxZOffset);
-                GameObject brick = brickPrefabs[randomIndex];
                 Instantiate(brick, new Vector3(x, y, z + randomZOffset), brick.transform.rotation);
                 x += brickSize.x;
             }            
@@ -28,3 +36,4 @@ public class BrickSpawner : MonoBehaviour
         }
     }
 }
+                
